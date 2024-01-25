@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {  StyleSheet, Text, View } from 'react-native';
 import LoginForm from './views/LoginForm';
 import tw from "twrnc";
 import RegisterForm from './views/Register';
@@ -12,6 +12,9 @@ import Notify from './views/Notification';
 import Dashboard from './views/Dashboard';
 import MedicineList from './views/MedicineList';
 import PharmacyList from './views/PharmacyList';
+import Modal from './views/Modal';
+
+import Test from './views/test';
 
 export default function App() {
   return (
@@ -27,6 +30,8 @@ export default function App() {
         <Dashboard/>
         {/* <MedicineList/> */}
         {/* <PharmacyList/> */}
+      {/* <Modal/> */}
+        
     </>
   );
 }

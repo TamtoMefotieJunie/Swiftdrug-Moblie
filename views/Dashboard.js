@@ -1,25 +1,40 @@
-import React from "react";
+import React, { useState }  from "react";
 import  Icon  from "react-native-vector-icons/FontAwesome5";
-import { Stylesheet, Text, View } from "react-native";
+import { StyleSheet,TouchableWithoutFeedback , TouchableOpacity, Text, View } from "react-native";
 import tw from "twrnc";
 import Rates from "../components/PharmacyRates";
 import Cards from "../components/Cards";
 import Card2 from "../components/Card2";
+import { Modal } from "react-native";
 
 function Dashboard() {
+    const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
+    const toggleSideMenu = () => {
+    setIsSideMenuOpen(!isSideMenuOpen);
+  };
+
+  const closeSideMenu = () => {
+    if (isSideMenuOpen) {
+      setIsSideMenuOpen(false);
+    }
+  };
   return (
     <>
-    <View style={tw`bg-white`}>
-        <View style={tw`bg-[#D9D9D9]/20 h-20 mt-8 p-5 flex-row justify-between`}>
-          <View>
-            <Icon name="bars" size={30} />
-          </View>
-
-          <View style={tw `flex-row justify-around w-[30%]`}>
-            <Icon name="bell" size={25} 
-            style={{marginTop:5}}
-            />
-            <View style={tw`rounded-lg w-12 h-12 bg-[#D9D9D9]`}>
+      <TouchableWithoutFeedback onPress={closeSideMenu}>
+        <View style={tw` w-full flex-1 h-full `}>
+            <View style={tw`bg-[#D9D9D9]/80 h-20  w-full mt-8 p-5 flex-row justify-between`}>
+          
+                <TouchableOpacity onPress={toggleSideMenu}>
+                    <View>
+                        <Icon name="bars" size={30} />
+                    </View>
+                </TouchableOpacity>
+                <View style={tw `flex-row justify-around w-[30%]`}>
+                <Icon name="bell" size={25} 
+                style={{marginTop:5}}
+                />
+                <View style={tw`rounded-lg w-12 h-12 bg-[#D9D9D9]`}>
                 <View style={tw `w-5 h-5 bg-[#01A768] rounded-full abolute left-9 top-5`}></View>
             </View>
           </View>
@@ -143,7 +158,59 @@ function Dashboard() {
             </View>
         </View>
         
+            {isSideMenuOpen && (
+                <View  style={tw `bg-[#00000060] rounded-lg w-full h-190 absolute`}>
+                    <View style={tw `bg-[#EDF1F5] rounded-lg w-77% h-full `}>
+                        <View style={tw `ml-4  pt-15 mb-5 h-20%`}>
+                            <Text style={tw `text-2xl text-[#229835]`}>SWIFT</Text>
+                            <Text style={tw `text-2xl text-[#206C8D]`}>DRUG</Text>
+                        </View>
+                            <View style={tw ` h-80%`}>
+                                <View style={tw `flex-row justify-between p-8`}>
+                                <View><Icon
+                                name="home"
+                                size={35}
+                                
+                                style={{color:"#3D7C98"}}
+                                    />
+                                    </View>
+                                    <View><Text style={tw `font-bold text-[#3D7C98] text-6`}>Home</Text></View>
+                                    <View style={tw `bg-[#3D7C98] w-5% h-110% rounded-lg`}></View>
+                                </View>
+                                <View style={tw `flex-row justify-between p-8`}>
+                                    <View><Icon
+                                    name="hospital"
+                                    size={35}
+                            />
+                            </View>
+                            <View><Text style={tw `font-bold text-6`}>Pharmacies</Text></View>
+                            {/* <View style={tw `bg-[#3D7C98] w-5% h-110% rounded-lg`}></View> */}
+                        </View>
+                        <View style={tw `flex-row justify-between p-8`}>
+                            <View><Icon
+                            name="file-invoice"
+                            size={35}
+                            />
+                            </View>
+                            <View><Text style={tw `font-bold text-6`}>Reservation</Text></View>
+                            {/* <View style={tw `bg-[#3D7C98] w-5% h-110% rounded-lg`}></View> */}
+                        </View>
+                        <View style={tw `flex-row justify-between p-8`}>
+                            <View><Icon
+                            name="user"
+                                size={35}
+                                />
+                                </View>
+                                <View><Text style={tw `font-bold text-6`}>Profile</Text></View>
+                                <View style={tw `bg-none w-5% h-110% rounded-lg`}></View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+             )}
+        
     </View>
+    </TouchableWithoutFeedback>
     </>
   );
 }
